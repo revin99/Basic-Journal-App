@@ -34,13 +34,13 @@ public class UserController {
         userService.saveEntry(user);
     }
 
-    @PutMapping
-    public ResponseEntity<?> updateUser(@RequestBody User user){
-        User byUserName = userService.findbyUserName(user.getUserName());
-        if(byUserName!=null){
-            byUserName.setUserName(user.getUserName());
-            byUserName.setPassword(user.getPassword());
-            userService.saveEntry(byUserName);
+    @PutMapping("/{userName}")
+    public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable String userName){
+        User userInDb = userService.findbyUserName(userName);
+        if(userInDb!=null){
+            userInDb.setUserName(user.getUserName());
+            userInDb.setPassword(user.getPassword());
+            userService.saveEntry(userInDb);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
