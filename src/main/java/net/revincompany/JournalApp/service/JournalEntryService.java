@@ -5,6 +5,7 @@ import net.revincompany.JournalApp.entity.User;
 import net.revincompany.JournalApp.repository.JournalEntryRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class JournalEntryService  {
     @Autowired
     private UserService userService;
 
+    @Transactional
     public void saveEntry(JournalEntry journalEntry, String userName){
         User user = userService.findbyUserName(userName);
         JournalEntry saved = journalEntryRepository.save(journalEntry);
