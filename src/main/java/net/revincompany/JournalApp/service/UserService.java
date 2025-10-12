@@ -1,5 +1,6 @@
 package net.revincompany.JournalApp.service;
 
+import lombok.extern.slf4j.Slf4j;
 import net.revincompany.JournalApp.entity.User;
 import net.revincompany.JournalApp.repository.UserRepository;
 import org.bson.types.ObjectId;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -23,7 +25,6 @@ public class UserService {
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public void saveNewEntry(User user) {
         try {
@@ -31,7 +32,7 @@ public class UserService {
             user.setRoles(Arrays.asList("USER"));
             userRepository.save(user);
         }catch (Exception e){
-            logger.error("User already exists {} :",user.getUserName(),e);
+            log.error("User already exists {} :",user.getUserName(),e);
         }
     }
 
