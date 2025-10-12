@@ -4,6 +4,8 @@ import net.revincompany.JournalApp.entity.JournalEntry;
 import net.revincompany.JournalApp.entity.User;
 import net.revincompany.JournalApp.repository.JournalEntryRepository;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,12 +22,20 @@ public class JournalEntryService  {
     @Autowired
     private UserService userService;
 
+    private static final Logger logger = LoggerFactory.getLogger(JournalEntryService.class);
+
     @Transactional
     public void saveEntry(JournalEntry journalEntry, String userName){
-        User user = userService.findbyUserName(userName);
-        JournalEntry saved = journalEntryRepository.save(journalEntry);
-        user.getJournalEntries().add(saved);
-        userService.saveUser(user);
+        try{
+            User user = userService.findbyUserName(userName);
+            JournalEntry saved = journalEntryRepository.save(journalEntry);
+            user.getJournalEntries().add(saved);
+            userService.saveUser(user);
+        }catch(Exception e){
+            System.out.println(e);
+            throw new RuntimeException("An error occured while saving the entry",e);
+        }
+
     }
 
     public void saveEntry(JournalEntry journalEntry){
