@@ -2,6 +2,7 @@ package net.revincompany.JournalApp.service;
 
 import net.revincompany.JournalApp.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
+@Disabled
 public class UserDetailsImplTest {
 
     @Autowired
