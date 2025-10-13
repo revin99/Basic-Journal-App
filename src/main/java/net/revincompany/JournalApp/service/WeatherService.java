@@ -6,6 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import sun.net.www.http.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -16,7 +17,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.net.URI;
 
-@Component
+@Service
 public class WeatherService {
 
     private static final String apikey ="d9aaeda81888ddb72e4ec8804ec66022";
